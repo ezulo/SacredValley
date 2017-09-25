@@ -1,7 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 #include <stack>
-#include <queue>
+#include <SFML/Graphics.hpp>
+#include <EventDispatcher.h>
 
 using namespace std;
 
@@ -14,15 +15,17 @@ class Game {
   
   public:
     void init();
-    void cleanup();
+    void run();
     void loop();
     bool is_running();
     void quit();
+    void cleanup();
     Game();
   
   private:
-    StateMgr stateMgr;
-    queue<Event> eventQueue;
+    StateMgr *stateMgr;
+    EventDispatcher *eventDispatcher;
+    sf::RenderWindow *game_window;
     Runflag runflag;
 }
 
