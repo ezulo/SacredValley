@@ -1,5 +1,6 @@
 #include <Game.h>
-#include <GameState.h>
+#include "EventDispatcher.h"
+#include "FrameMgr.h"
 
 void Game::init()
 {  
@@ -8,20 +9,22 @@ void Game::init()
 
 void Game::run()
 {
-  while (game_window.isOpen()) {
+  while (gameWindow.isOpen()) {
     sf::Event event;
-    while (game_window.pollEvent(event)) {
+    while (gameWindow.pollEvent(event)) {
       if (event.type == sf::Event::Closed)
-        game_window.close();
+        gameWindow.close();
 	quit();
     }
     loop();
   }
+  quit();
+  return;
 }
 
 int Game::loop() 
 {
-  stateMgr->loop();
+  frameMgr->loop();
 }
 
 bool Game::is_running() 
@@ -39,13 +42,13 @@ void Game::cleanup()
   //delete any data unaccounted for
   free(stateMgr);
   free(eventDispatcher);
-  free(game_window);
+  free(gameWindow);
 }
 
 Game::Game() {
-  stateMgr = new StateMgr();
-  eventDispatcher = new EventDispatcher();
-  game_window = new sf::RenderWindow(sf::VideoMode(800,600), "SFML Works!");
+  frameMgr = new FrameMgr();
+  eventDispatcher = new EventDispatcher(frameMgr, gameWindow);
+  gameWindow = new sf::RenderWindow(sf::VideoMode(800,600), "SFML Works!");
   init();
 }
 

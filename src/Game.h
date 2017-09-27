@@ -2,13 +2,15 @@
 #define GAME_H
 #include <stack>
 #include <SFML/Graphics.hpp>
-#include <EventDispatcher.h>
+#include "EventDispatcher.h"
+#include "FrameMgr.h"
 
 using namespace std;
 
 enum Runflag {
   RUNFLAG_LOADING,
-  RUNFLAG_STARTED
+  RUNFLAG_STARTED,
+  RUNFLAG_QUIT
 }
 
 class Game {
@@ -23,9 +25,9 @@ class Game {
     Game();
   
   private:
-    StateMgr *stateMgr;
+    FrameMgr *frameMgr;
     EventDispatcher *eventDispatcher;
-    sf::RenderWindow *game_window;
+    sf::RenderWindow *gameWindow;
     Runflag runflag;
 }
 

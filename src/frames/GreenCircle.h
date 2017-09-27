@@ -10,7 +10,7 @@ class GreenCircle : public GameFrame {
   public:
     void init();
     void loop();
-    int  event();
+    int  event(Event* event);
     void draw();
     GreenCircle(sf::RenderWindow *wptr);
   private:

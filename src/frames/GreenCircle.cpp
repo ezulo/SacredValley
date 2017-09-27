@@ -13,7 +13,7 @@ void GreenCircle::loop()
   return;
 }
 
-int GreenCircle::event()
+int GreenCircle::event(Event* event)
 {
   //no events handled
   return 0;
