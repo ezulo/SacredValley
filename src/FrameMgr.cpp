@@ -1,39 +1,28 @@
-#include <frames/GameFrame.h>
-#include <FrameMgr.h>
-#include <GreenCircle.h>
-#include <stack>
+#include "FrameMgr.h"
+#include "frames/GameFrame.h"
+#include "frames/GreenCircle.h"
 
 void FrameMgr::init()
 {
-  //do some setup stuff
- GameFrame *init_frame = new GreenCircle();
- push_frame(init_frame);
- update_frame();
+  GameFrame *init_frame = new GreenCircle();
+  push_frame(init_frame);
+  return;
 }
 
 int FrameMgr::loop()
 {
-  if (currentFrame)
-  {
-    return currentFrame->loop();
-  } else {
-    return 1;
+  if (get_current_frame()){ 
+    return get_current_frame()->loop();
   }
+  return 0;
 }
 
-int transmit_event(Event *event)
+int FrameMgr::transmit_event(Event *event)
 {
-  if(currentFrame) {
-    return currentFrame->event(event);
-  } else {
-    return 1;
+  if (get_current_frame()){
+    return get_current_frame()->event(event);
   }
-}
-
-void FrameMgr::update_frame()
-{
-  currentFrame = frames->top();
-  return;
+  return 0;
 }
 
 void FrameMgr::push_frame(GameFrame *frame)
@@ -43,9 +32,9 @@ void FrameMgr::push_frame(GameFrame *frame)
   return;
 }
 
-void pop_frame()
+void FrameMgr::pop_frame()
 {
-  frames->pop();
+  free(frames->pop());
   update_frame();
   return;
 }
@@ -57,5 +46,19 @@ GameFrame* FrameMgr::get_current_frame()
 
 FrameMgr::FrameMgr()
 {
-  //allocate data members 
+  init();
+}
+
+void FrameMgr::update_frame()
+{
+  if (frames->top()){
+    currentFrame = frames->top();
+  } else {
+    quit();
+  }
+}
+
+FrameMgr::~FrameMgr()
+{
+  free(currentFrame);
 }

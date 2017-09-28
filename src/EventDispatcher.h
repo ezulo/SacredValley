@@ -1,7 +1,7 @@
 #ifndef EVENTDISPATCHER_H
 #define EVENTDISPATCHER_H
 
-#include <SFML/Graphics.h>
+#include <SFML/Graphics.hpp>
 #include "Game.h"
 #include "FrameMgr.h"
 #include "Event.h"
@@ -10,11 +10,11 @@
 class EventDispatcher 
 {
   public:
-    send_event(Event event, GameFrame *frame);
+    int send_event(Event event, GameFrame *frame);
     EventDispatcher(FrameMgr* fMptr, sf::RenderWindow* gWptr);
   private:
     FrameMgr* frameMgr;
     sf::RenderWindow* gameWindow;
-}
+};
 
 #endif

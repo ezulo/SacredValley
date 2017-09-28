@@ -1,8 +1,8 @@
 #ifndef GREENCIRCLE_H
 #define GREENCIRCLE_H
 
-#include<GameFrame.h>
 #include<SFML/Graphics.hpp>
+#include"GameFrame.h"
 
 using namespace std;
 
@@ -16,7 +16,7 @@ class GreenCircle : public GameFrame {
   private:
     sf::RenderWindow *game_window;
     //below are assets, just for testing purposes
-    sf:CircleShape shape;
-}
+    sf::CircleShape shape;
+};
 
 #endif

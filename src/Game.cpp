@@ -45,10 +45,14 @@ void Game::cleanup()
   free(gameWindow);
 }
 
-Game::Game() {
+Game::Game() 
+{
   frameMgr = new FrameMgr();
   eventDispatcher = new EventDispatcher(frameMgr, gameWindow);
   gameWindow = new sf::RenderWindow(sf::VideoMode(800,600), "SFML Works!");
   init();
+}
+
+Game::~Game(){
 }
 

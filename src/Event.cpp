@@ -1,6 +1,4 @@
-#ifndef EVENT_H
-#define EVENT_H
-#include <string>
+#include "Event.h"
 
 Event::Event(string message)
 {
@@ -16,4 +14,3 @@ Event::~Event()
 {
 }
 
-#endif
