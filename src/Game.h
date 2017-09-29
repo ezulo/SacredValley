@@ -19,7 +19,7 @@ class Game {
   public:
     void init();
     void run();
-    void loop();
+    int loop();
     bool is_running();
     void quit();
     void cleanup();

@@ -1,9 +1,8 @@
-#include <EventDispatcher.h>
-#include "Event.h"
+#include "EventDispatcher.h"
 
-int EventDispatcher::send_event(Event event)
+int EventDispatcher::send_event(Event* event)
 {
-  return frameMgr->getFrame()->event(event); 
+  return frameMgr->transmit_event(event); 
 }
 
 EventDispatcher::EventDispatcher(FrameMgr* fMptr, sf::RenderWindow* gWptr)

@@ -1,19 +1,18 @@
-#include <GreenCircle.h>
-#include <SFML/Graphics.hpp>
+#include "GreenCircle.h"
 
 void GreenCircle::init()
 {
   return;
 }
 
-void GreenCircle::loop()
+int GreenCircle::loop()
 {
   //do nothing else here, just for testing
   draw();
-  return;
+  return 0;
 }
 
-int GreenCircle::event(Event* event)
+int GameFrame::event(Event* event)
 {
   //no events handled
   return 0;
@@ -27,8 +26,8 @@ void GreenCircle::draw()
   return;
 }
 
-GreenCircle::GreenCircle(sf::RenderWindow *wptr) 
+GreenCircle::GreenCircle(sf::RenderWindow *wptr)
 {
   game_window = wptr;
-  shape = new sf::CircleShape(100,f);
+  shape = sf::CircleShape(100.f);
 }
