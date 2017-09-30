@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Game.h"
+#include <iostream>
 
 //int main() {
 //  sf::RenderWindow window(sf::VideoMode(800,600), "SFML Works!");
@@ -22,6 +23,7 @@
 //}
 
 int main() {
-  Game main;
-  main.run();
+  //Game main;
+  //main.run();
+  std::cout << "Terminating";
 }

@@ -5,10 +5,10 @@
 
 class GameFrame{
   public:
-    virtual void init();
-    virtual void draw();
-    virtual int  loop();
-    virtual int  event(Event* event);
+    virtual void init() = 0;
+    virtual void draw() = 0;
+    virtual int  loop() = 0;
+    virtual int  event(Event* event) = 0;
     
   protected:
     GameFrame() {}

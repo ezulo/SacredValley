@@ -27,9 +27,9 @@ class Game {
     ~Game();
   
   private:
-    FrameMgr *frameMgr;
-    EventDispatcher *eventDispatcher;
-    sf::RenderWindow *gameWindow;
+    FrameMgr* frameMgr;
+    EventDispatcher* eventDispatcher;
+    sf::RenderWindow* gameWindow;
     Runflag runflag;
 };
 

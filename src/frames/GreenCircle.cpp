@@ -1,4 +1,5 @@
 #include "GreenCircle.h"
+#include <iostream>
 
 void GreenCircle::init()
 {
@@ -12,7 +13,7 @@ int GreenCircle::loop()
   return 0;
 }
 
-int GameFrame::event(Event* event)
+int GreenCircle::event(Event* event)
 {
   //no events handled
   return 0;
@@ -28,6 +29,8 @@ void GreenCircle::draw()
 
 GreenCircle::GreenCircle(sf::RenderWindow *wptr)
 {
+  std::cout << "GreenCircle state instantiated";
   game_window = wptr;
   shape = sf::CircleShape(100.f);
+  std::cout << "Shape created.";
 }

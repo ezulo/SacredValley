@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <iostream>
 
 void Game::init()
 {  
@@ -23,7 +24,7 @@ void Game::run()
 
 int Game::loop() 
 {
-  frameMgr->loop();
+  return frameMgr->loop();
 }
 
 bool Game::is_running() 
