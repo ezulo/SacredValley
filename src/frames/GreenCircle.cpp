@@ -1,8 +1,25 @@
-#include "GreenCircle.h"
 #include <iostream>
+#include "GreenCircle.h"
 
-void GreenCircle::init()
+void GreenCircle::draw()
 {
+  //create glow effect
+  if (green >= 255) {
+    flux = false;
+  } else if (green <= 0) {
+    flux = true;
+  }
+  if (flux) {
+    green++;
+  } else {
+    green--;
+  }
+
+  shape.setFillColor(sf::Color(0, green, 0));
+  
+  game_window->clear();
+  game_window->draw(shape);
+  game_window->display();
   return;
 }
 
@@ -15,22 +32,17 @@ int GreenCircle::loop()
 
 int GreenCircle::event(Event* event)
 {
-  //no events handled
+  //no events handled here, class is just for testing
   return 0;
-}
-
-void GreenCircle::draw()
-{
-  game_window->clear();
-  game_window->draw(shape);
-  game_window->display();
-  return;
 }
 
 GreenCircle::GreenCircle(sf::RenderWindow *wptr)
 {
-  std::cout << "GreenCircle state instantiated";
   game_window = wptr;
   shape = sf::CircleShape(100.f);
-  std::cout << "Shape created.";
+  shape.setFillColor(sf::Color(0, 255, 0));
+}
+
+GreenCircle::~GreenCircle()
+{
 }

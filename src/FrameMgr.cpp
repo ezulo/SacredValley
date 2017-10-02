@@ -1,15 +1,13 @@
+#include <iostream>
 #include "FrameMgr.h"
 
-void FrameMgr::init()
-{
-  GameFrame *init_frame = new GreenCircle(gameWindow);
-  push_frame(init_frame);
-  return;
-}
+/* 
+PUBLIC
+*/
 
 int FrameMgr::loop()
 {
-  if (get_current_frame()){ 
+  if (get_current_frame() != NULL){ 
     return get_current_frame()->loop();
   }
   return 0;
@@ -28,42 +26,46 @@ int FrameMgr::transmit_event(Event *event)
   return 0;
 }
 
-void FrameMgr::push_frame(GameFrame *frame)
-{
-  frames->push(frame);
-  update_frame();
-  return;
-}
-
-void FrameMgr::pop_frame()
-{
-  free(frames->top());
-  frames->pop();
-  update_frame();
-  return;
-}
 
 GameFrame* FrameMgr::get_current_frame()
 {
-  return currentFrame;
+  return frames.top();
 }
 
 FrameMgr::FrameMgr(sf::RenderWindow* wPtr)
 {
   gameWindow = wPtr;
-  init();
-}
-
-void FrameMgr::update_frame()
-{
-  if (frames->top()){
-    currentFrame = frames->top();
-  } else {
-    quit();
-  }
+  GameFrame *init_frame = new GreenCircle(gameWindow);
+  push_frame(init_frame);
 }
 
 FrameMgr::~FrameMgr()
 {
-  free(currentFrame);
+  //need to empty frames
+  purge_frames();
+}
+
+/*
+PRIVATE
+*/
+
+void FrameMgr::purge_frames()
+{
+  while (!frames.empty()) {
+    GameFrame* tmp = frames.top();
+    frames.pop();
+    delete tmp;
+  }
+}
+
+void FrameMgr::push_frame(GameFrame *frame)
+{
+  frames.push(frame);
+  return;
+}
+
+void FrameMgr::pop_frame()
+{
+  frames.pop();
+  return;
 }

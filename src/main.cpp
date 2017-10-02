@@ -23,7 +23,9 @@
 //}
 
 int main() {
-  //Game main;
-  //main.run();
-  std::cout << "Terminating";
+  Game* main;
+  main = new Game();
+  main->run();
+  std::cout << "Game finished." << endl;
+  delete main;
 }

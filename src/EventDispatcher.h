@@ -11,6 +11,7 @@ class EventDispatcher
   public:
     int send_event(Event* event);
     EventDispatcher(FrameMgr* fMptr, sf::RenderWindow* gWptr);
+    ~EventDispatcher();
   private:
     FrameMgr* frameMgr;
     sf::RenderWindow* gameWindow;

@@ -12,13 +12,11 @@ void Game::run()
     sf::Event event;
     while (gameWindow->pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
-        gameWindow->close();
-	quit();
+        return;
       }
     }
     loop();
   }
-  quit();
   return;
 }
 
@@ -32,27 +30,21 @@ bool Game::is_running()
   return (runflag == RUNFLAG_STARTED);
 }
 
-void Game::quit() 
-{
-  cleanup(); 
-}
-
-void Game::cleanup()
-{
-  //delete any data unaccounted for
-  free(frameMgr);
-  free(eventDispatcher);
-  free(gameWindow);
-}
 
 Game::Game() 
 {
   eventDispatcher = new EventDispatcher(frameMgr, gameWindow);
   gameWindow = new sf::RenderWindow(sf::VideoMode(800,600), "SFML Works!");
+  gameWindow->setFramerateLimit(60);
   frameMgr = new FrameMgr(gameWindow);
   init();
 }
 
-Game::~Game(){
+Game::~Game()
+{
+  gameWindow->close();
+  delete gameWindow;
+  delete eventDispatcher;
+  delete frameMgr;
 }
 

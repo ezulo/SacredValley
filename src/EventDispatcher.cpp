@@ -10,3 +10,8 @@ EventDispatcher::EventDispatcher(FrameMgr* fMptr, sf::RenderWindow* gWptr)
   frameMgr = fMptr;
   gameWindow = gWptr;
 }
+
+EventDispatcher::~EventDispatcher()
+{
+  
+}

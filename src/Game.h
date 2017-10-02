@@ -21,8 +21,6 @@ class Game {
     void run();
     int loop();
     bool is_running();
-    void quit();
-    void cleanup();
     Game();
     ~Game();
   

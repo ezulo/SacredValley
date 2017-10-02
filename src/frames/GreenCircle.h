@@ -8,15 +8,16 @@ using namespace std;
 
 class GreenCircle : public GameFrame {
   public:
-    void init();
     void draw();
-    int loop();
+    int  loop();
     int  event(Event* event);
     GreenCircle(sf::RenderWindow *wptr);
+    ~GreenCircle();
   private:
     sf::RenderWindow *game_window;
-    //below are assets, just for testing purposes
     sf::CircleShape shape;
+    bool flux;
+    int green;
 };
 
 #endif

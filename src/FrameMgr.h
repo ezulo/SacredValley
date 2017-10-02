@@ -9,20 +9,18 @@
 
 class FrameMgr {
   public:
-    void init();
     int  loop();
     void quit();
-    int  transmit_event(Event *event);
-    void push_frame(GameFrame *frame);
-    void pop_frame();
+    int  transmit_event(Event* event);
     GameFrame* get_current_frame();
     FrameMgr(sf::RenderWindow* wPtr);
-  private:
-    void update_frame();
-    unique_ptr<stack<GameFrame*>> frames;
-    GameFrame* currentFrame;
-    sf::RenderWindow* gameWindow;
     ~FrameMgr();
+  private:
+    void purge_frames();
+    void push_frame(GameFrame* frame);
+    void pop_frame();
+    stack<GameFrame*> frames;
+    sf::RenderWindow* gameWindow;
 };
 
 #endif
