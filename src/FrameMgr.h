@@ -5,12 +5,11 @@
 #include <SFML/Graphics.hpp> 
 #include "frames/GameFrame.h"
 #include "frames/GreenCircle.h"
-#include "Event.h"
+#include "frames/RedCircle.h"
 
 class FrameMgr {
   public:
     int  loop();
-    void quit();
     int  transmit_event(Event* event);
     GameFrame* get_current_frame();
     FrameMgr(sf::RenderWindow* wPtr);

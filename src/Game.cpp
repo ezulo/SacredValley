@@ -15,7 +15,7 @@ void Game::run()
         return;
       }
     }
-    loop();
+    if (loop() == -1) return;
   }
   return;
 }

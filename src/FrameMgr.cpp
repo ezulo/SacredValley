@@ -9,13 +9,9 @@ int FrameMgr::loop()
 {
   if (get_current_frame() != NULL){ 
     return get_current_frame()->loop();
+  } else {
+    return -1;
   }
-  return 0;
-}
-
-void FrameMgr::quit()
-{
-  delete this;
 }
 
 int FrameMgr::transmit_event(Event *event)
@@ -26,7 +22,6 @@ int FrameMgr::transmit_event(Event *event)
   return 0;
 }
 
-
 GameFrame* FrameMgr::get_current_frame()
 {
   return frames.top();
@@ -35,7 +30,7 @@ GameFrame* FrameMgr::get_current_frame()
 FrameMgr::FrameMgr(sf::RenderWindow* wPtr)
 {
   gameWindow = wPtr;
-  GameFrame *init_frame = new GreenCircle(gameWindow);
+  GameFrame *init_frame = new RedCircle(gameWindow);
   push_frame(init_frame);
 }
 

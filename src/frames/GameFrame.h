@@ -9,7 +9,10 @@ class GameFrame{
     virtual int  loop() = 0;
     virtual int  event(Event* event) = 0;
   protected:
-    GameFrame() {}
+    sf::RenderWindow *game_window;
+    GameFrame(sf::RenderWindow *wptr) {
+      game_window = wptr;
+    }
 };
 
 #endif

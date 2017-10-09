@@ -36,9 +36,8 @@ int GreenCircle::event(Event* event)
   return 0;
 }
 
-GreenCircle::GreenCircle(sf::RenderWindow *wptr)
+GreenCircle::GreenCircle(sf::RenderWindow *wptr):GameFrame(wptr)
 {
-  game_window = wptr;
   shape = sf::CircleShape(100.f);
   shape.setFillColor(sf::Color(0, 255, 0));
 }
