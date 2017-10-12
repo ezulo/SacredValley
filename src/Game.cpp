@@ -36,7 +36,8 @@ Game::Game()
   eventDispatcher = new EventDispatcher(frameMgr, gameWindow);
   gameWindow = new sf::RenderWindow(sf::VideoMode(800,600), "SFML Works!");
   gameWindow->setFramerateLimit(60);
-  frameMgr = new FrameMgr(gameWindow);
+  inputMgr = new InputMgr();
+  frameMgr = new FrameMgr(gameWindow, inputMgr);
   init();
 }
 
@@ -46,5 +47,6 @@ Game::~Game()
   delete gameWindow;
   delete eventDispatcher;
   delete frameMgr;
+  delete inputMgr;
 }
 

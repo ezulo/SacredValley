@@ -1,117 +1,58 @@
 #include <iostream>
 #include "RedCircle.h"
 
-const float DEF_VELO = 10.0;
-enum Direction {E,SE,S,SW,W,NW,N,NE,None};
-const Direction DIRECTIONMAP[16] = {
-  None,
-  E,
-  S,
-  SE,
-  W,
-  None,
-  SW,
-  S,
-  N,
-  NE,
-  None,
-  E,
-  NW,
-  N,
-  W,
-  None
-};
+const float DEF_VELO = 5.0;
 
-Direction translate_dir(int right, int down, int left, int up)
-{
-  //hard coding some of this makes for faster execution
-  int dirMap[4] = {right, down, left, up};
-  int powers[4] = {1, 2, 4, 8};
-  int total = 0;
-  for (int i = 0; i < 4; i++) {
-    total += dirMap[i] * powers[i];
-  }
-  std::cout << total << endl;
-  return DIRECTIONMAP[total];
-}
-
-void RedCircle::handle_events()
-{
-  bool keymap[6] = {false, false, false, false, false, false};
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-    keymap[0] = true;
-  }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-    keymap[1] = true;
-  }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-    keymap[2] = true;
-  }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-    keymap[3] = true;
-  }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
-    keymap[4] = true;
-  }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
-    keymap[5] = true;
-  }
-
-  float mult = 0.7071067; //approx 1 / sqrt(2)
-  Direction trans = translate_dir(keymap[0], keymap[1], keymap[2], keymap[3]);
-  switch (trans) {
-    case E:
-      std::cout << "E" << endl;
+void RedCircle::handle_events(){
+  float mult = 0.7071067;
+  switch (inputMgr->getInput("dir")){
+    case -1:
+      xVelo = 0;
+      yVelo = 0;
+      break;
+    case 0:
       xVelo = DEF_VELO;
       yVelo = 0;
       break;
-    case SE:
-      std::cout << "SE" << endl;
+    case 1:
       xVelo = DEF_VELO * mult;
       yVelo = -DEF_VELO * mult;
       break;
-    case S:
-      std::cout << "S" << endl;
+    case 2:
       xVelo = 0;
       yVelo = -DEF_VELO;
       break;
-    case SW:
-      std::cout << "SW" << endl;
+    case 3:
       xVelo = -DEF_VELO * mult;
       yVelo = -DEF_VELO * mult;
       break;
-    case W:
-      std::cout << "W" << endl;
+    case 4:
       xVelo = -DEF_VELO;
       yVelo = 0;
       break;
-    case NW:
-      std::cout << "NW" << endl;
+    case 5:
       xVelo = -DEF_VELO * mult;
       yVelo = DEF_VELO * mult;
       break;
-    case N:
-      std::cout << "N" << endl;
+    case 6:
       xVelo = 0;
       yVelo = DEF_VELO;
       break;
-    case NE:
-      std::cout << "NE" << endl;
+    case 7:
       xVelo = DEF_VELO * mult;
       yVelo = DEF_VELO * mult;
       break;
-    case None:
-      std::cout << "Stay" << endl;
-      xVelo = yVelo = 0;
+    default:
+      std::cout << "ERROR PARSING DIRECTION" << endl;
+      xVelo = 0;
+      yVelo = 0;
       break;
   }
-
   return;
 }
 
 void RedCircle::draw()
 {
-  handle_events();
 
   //create glow effect
   if (red >= 255) {
@@ -137,18 +78,19 @@ void RedCircle::draw()
 
 int RedCircle::loop()
 {
-  //do nothing else here, just for testing
+  inputMgr->listen();
+  handle_events();
   draw();
   return 0;
 }
 
-int RedCircle::event(Event* event)
+int RedCircle::event(sf::Event* event)
 {
   //no events handled here, class is just for testing
   return 0;
 }
 
-RedCircle::RedCircle(sf::RenderWindow *wptr):GameFrame(wptr)
+RedCircle::RedCircle(sf::RenderWindow* wptr, InputMgr* iMptr):GameFrame(wptr, iMptr)
 {
   shape = sf::CircleShape(20.f);
   shape.setFillColor(sf::Color(255, 0, 0));

@@ -1,7 +1,6 @@
 #ifndef REDCIRCLE_H
 #define REDCIRCLE_H
 
-#include <SFML/Graphics.hpp>
 #include "GameFrame.h"
 
 using namespace std;
@@ -11,8 +10,8 @@ class RedCircle : public GameFrame {
     void handle_events();
     void draw();
     int  loop();
-    int  event(Event* event);
-    RedCircle(sf::RenderWindow *wptr);
+    int  event(sf::Event* event);
+    RedCircle(sf::RenderWindow *wptr, InputMgr *iMptr);
     ~RedCircle();
   private:
     sf::CircleShape shape;

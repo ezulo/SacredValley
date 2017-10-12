@@ -14,7 +14,7 @@ int FrameMgr::loop()
   }
 }
 
-int FrameMgr::transmit_event(Event *event)
+int FrameMgr::transmit_event(sf::Event *event)
 {
   if (get_current_frame()){
     return get_current_frame()->event(event);
@@ -27,10 +27,11 @@ GameFrame* FrameMgr::get_current_frame()
   return frames.top();
 }
 
-FrameMgr::FrameMgr(sf::RenderWindow* wPtr)
+FrameMgr::FrameMgr(sf::RenderWindow* wPtr, InputMgr* iMptr)
 {
   gameWindow = wPtr;
-  GameFrame *init_frame = new RedCircle(gameWindow);
+  inputMgr = iMptr;
+  GameFrame *init_frame = new RedCircle(gameWindow, inputMgr);
   push_frame(init_frame);
 }
 

@@ -3,13 +3,12 @@
 
 #include <SFML/Graphics.hpp>
 #include "FrameMgr.h"
-#include "Event.h"
-#include "frames/GameFrame.h"
+#include "../frames/GameFrame.h"
 
 class EventDispatcher 
 {
   public:
-    int send_event(Event* event);
+    int send_event(sf::Event* event);
     EventDispatcher(FrameMgr* fMptr, sf::RenderWindow* gWptr);
     ~EventDispatcher();
   private:

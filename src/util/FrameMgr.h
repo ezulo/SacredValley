@@ -3,16 +3,16 @@
 
 #include <stack>
 #include <SFML/Graphics.hpp> 
-#include "frames/GameFrame.h"
-#include "frames/GreenCircle.h"
-#include "frames/RedCircle.h"
+#include "InputMgr.h"
+#include "../frames/GameFrame.h"
+#include "../frames/RedCircle.h"
 
 class FrameMgr {
   public:
     int  loop();
-    int  transmit_event(Event* event);
+    int  transmit_event(sf::Event* event);
     GameFrame* get_current_frame();
-    FrameMgr(sf::RenderWindow* wPtr);
+    FrameMgr(sf::RenderWindow* wPtr, InputMgr* iMptr);
     ~FrameMgr();
   private:
     void purge_frames();
@@ -20,6 +20,7 @@ class FrameMgr {
     void pop_frame();
     stack<GameFrame*> frames;
     sf::RenderWindow* gameWindow;
+    InputMgr* inputMgr;
 };
 
 #endif

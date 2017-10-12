@@ -3,8 +3,9 @@
 
 #include <stack>
 #include <SFML/Graphics.hpp>
-#include "EventDispatcher.h"
-#include "FrameMgr.h"
+#include "util/EventDispatcher.h"
+#include "util/FrameMgr.h"
+#include "util/InputMgr.h"
 
 using namespace std;
 
@@ -26,6 +27,7 @@ class Game {
   
   private:
     FrameMgr* frameMgr;
+    InputMgr* inputMgr;
     EventDispatcher* eventDispatcher;
     sf::RenderWindow* gameWindow;
     Runflag runflag;

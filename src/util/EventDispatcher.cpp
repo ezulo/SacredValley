@@ -1,6 +1,6 @@
 #include "EventDispatcher.h"
 
-int EventDispatcher::send_event(Event* event)
+int EventDispatcher::send_event(sf::Event* event)
 {
   return frameMgr->transmit_event(event); 
 }

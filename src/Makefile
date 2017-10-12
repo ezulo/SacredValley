@@ -1,7 +1,7 @@
-OBJS = main.o Game.o Event.o EventDispatcher.o FrameMgr.o GreenCircle.o RedCircle.o
+OBJS = main.o Game.o EventDispatcher.o FrameMgr.o InputMgr.o RedCircle.o
 CC = g++
 DEBUG = -g
-CFLAGS = -c ${DEBUG}
+CFLAGS = -std=c++11 -c ${DEBUG}
 LFLAGS = ${SFML} ${DEBUG}
 OBJDIR = build
 SFML = -lsfml-graphics -lsfml-window -lsfml-system 
@@ -12,20 +12,20 @@ my_game: ${OBJS}
 main.o: main.cpp Game.h
 	${CC} ${CFLAGS} main.cpp
 
-Game.o: Game.cpp Game.h EventDispatcher.h FrameMgr.h
+Game.o: Game.cpp Game.h util/EventDispatcher.h util/FrameMgr.h util/InputMgr.h
 	${CC} ${CFLAGS} Game.cpp
 
-Event.o: Event.cpp Event.h
-	${CC} ${CFLAGS} Event.cpp
-	
-EventDispatcher.o: EventDispatcher.cpp EventDispatcher.h Event.h
-	${CC} ${CFLAGS} EventDispatcher.cpp
+EventDispatcher.o: util/EventDispatcher.cpp util/EventDispatcher.h 
+	${CC} ${CFLAGS} util/EventDispatcher.cpp
 
-FrameMgr.o: FrameMgr.cpp FrameMgr.h frames/GameFrame.h frames/GreenCircle.h frames/RedCircle.h
-	${CC} ${CFLAGS} FrameMgr.cpp
+FrameMgr.o: util/FrameMgr.cpp util/FrameMgr.h util/InputMgr.h frames/GameFrame.h frames/RedCircle.h
+	${CC} ${CFLAGS} util/FrameMgr.cpp
 
-GreenCircle.o: frames/GreenCircle.cpp frames/GreenCircle.h frames/GameFrame.h
-	${CC} ${CFLAGS} frames/GreenCircle.cpp
+InputMgr.o: util/InputMgr.cpp util/InputMgr.h
+	${CC} ${CFLAGS} util/InputMgr.cpp
+
+GameFrame.o: frames/GameFrame.cpp frames/GameFrame.h util/InputMgr.h
+	${CC} ${CFLAGS} frames/GameFrame.cpp
 
 RedCircle.o: frames/RedCircle.cpp frames/RedCircle.h frames/GameFrame.h
 	${CC} ${CFLAGS} frames/RedCircle.cpp
