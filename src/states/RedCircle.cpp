@@ -1,7 +1,7 @@
 #include <iostream>
 #include "RedCircle.h"
 
-const float DEF_VELO = 5.0;
+const float DEF_VELO = 10.0;
 
 void RedCircle::handle_events(){
   float mult = 0.7071067;
@@ -51,6 +51,9 @@ void RedCircle::handle_events(){
   return;
 }
 
+void RedCircle::load_assets(const std::string fontName) {
+}
+
 void RedCircle::draw()
 {
 
@@ -84,13 +87,12 @@ int RedCircle::loop()
   return 0;
 }
 
-int RedCircle::event(sf::Event* event)
+int event(sf::Event* event)
 {
-  //no events handled here, class is just for testing
   return 0;
 }
 
-RedCircle::RedCircle(sf::RenderWindow* wptr, InputMgr* iMptr):GameFrame(wptr, iMptr)
+RedCircle::RedCircle(sf::RenderWindow* wptr, InputMgr* iMptr, ResourceMgr* rMptr):GameState(wptr, iMptr, rMptr)
 {
   shape = sf::CircleShape(20.f);
   shape.setFillColor(sf::Color(255, 0, 0));

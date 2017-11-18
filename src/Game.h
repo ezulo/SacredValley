@@ -1,11 +1,15 @@
 #ifndef GAME_H
 #define GAME_H
 
+//libraries
 #include <stack>
 #include <SFML/Graphics.hpp>
+
+//all util modules
 #include "util/EventDispatcher.h"
-#include "util/FrameMgr.h"
 #include "util/InputMgr.h"
+#include "util/StateMgr.h"
+#include "util/ResourceMgr.h"
 
 using namespace std;
 
@@ -26,8 +30,9 @@ class Game {
     ~Game();
   
   private:
-    FrameMgr* frameMgr;
+    StateMgr* stateMgr;
     InputMgr* inputMgr;
+    ResourceMgr* resourceMgr;
     EventDispatcher* eventDispatcher;
     sf::RenderWindow* gameWindow;
     Runflag runflag;

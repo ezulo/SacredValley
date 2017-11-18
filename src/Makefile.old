@@ -1,0 +1,34 @@
+OBJS = main.o Game.o EventDispatcher.o StateMgr.o InputMgr.o RedCircle.o
+CC = g++
+DEBUG = -g
+CFLAGS = -std=c++11 -c ${DEBUG}
+LFLAGS = ${SFML} ${DEBUG}
+OBJDIR = build
+SFML = -lsfml-graphics -lsfml-window -lsfml-system 
+
+my_game: ${OBJS}
+	${CC} ${OBJS} -o my_game ${LFLAGS} 	
+	
+main.o: main.cpp Game.h
+	${CC} ${CFLAGS} main.cpp
+
+Game.o: Game.cpp util/EventDispatcher.h util/StateMgr.h util/InputMgr.h
+	${CC} ${CFLAGS} Game.cpp
+
+EventDispatcher.o: util/EventDispatcher.cpp util/EventDispatcher.h 
+	${CC} ${CFLAGS} util/EventDispatcher.cpp
+
+StateMgr.o: util/StateMgr.cpp util/InputMgr.h states/GameState.h states/RedCircle.h
+	${CC} ${CFLAGS} util/StateMgr.cpp
+
+InputMgr.o: util/InputMgr.cpp util/InputMgr.h
+	${CC} ${CFLAGS} util/InputMgr.cpp
+
+ResourceMgr.o: util/ResourceMgr.cpp 
+	${CC} ${CFLAGS} util/ResourceMgr.o
+
+GameState.o: states/GameState.cpp util/InputMgr.h
+	${CC} ${CFLAGS} states/GameState.cpp
+
+RedCircle.o: states/RedCircle.cpp states/GameState.h
+	${CC} ${CFLAGS} states/RedCircle.cpp

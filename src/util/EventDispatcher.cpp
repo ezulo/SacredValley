@@ -2,12 +2,12 @@
 
 int EventDispatcher::send_event(sf::Event* event)
 {
-  return frameMgr->transmit_event(event); 
+  return stateMgr->transmit_event(event); 
 }
 
-EventDispatcher::EventDispatcher(FrameMgr* fMptr, sf::RenderWindow* gWptr)
+EventDispatcher::EventDispatcher(StateMgr* sMptr, sf::RenderWindow* gWptr)
 {
-  frameMgr = fMptr;
+  stateMgr = sMptr;
   gameWindow = gWptr;
 }
 

@@ -22,7 +22,7 @@ void Game::run()
 
 int Game::loop() 
 {
-  return frameMgr->loop();
+  return stateMgr->loop();
 }
 
 bool Game::is_running() 
@@ -30,14 +30,14 @@ bool Game::is_running()
   return (runflag == RUNFLAG_STARTED);
 }
 
-
 Game::Game() 
 {
-  eventDispatcher = new EventDispatcher(frameMgr, gameWindow);
+  eventDispatcher = new EventDispatcher(stateMgr, gameWindow);
   gameWindow = new sf::RenderWindow(sf::VideoMode(800,600), "SFML Works!");
   gameWindow->setFramerateLimit(60);
   inputMgr = new InputMgr();
-  frameMgr = new FrameMgr(gameWindow, inputMgr);
+  stateMgr = new StateMgr(gameWindow, inputMgr, resourceMgr);
+  resourceMgr = new ResourceMgr("../../resource");
   init();
 }
 
@@ -46,7 +46,8 @@ Game::~Game()
   gameWindow->close();
   delete gameWindow;
   delete eventDispatcher;
-  delete frameMgr;
+  delete stateMgr;
   delete inputMgr;
+  delete resourceMgr;
 }
 
