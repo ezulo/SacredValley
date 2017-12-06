@@ -14,7 +14,7 @@ class GameState{
     virtual int  loop() = 0;
     virtual int  event(sf::Event* event);
     //global functionality
-    sf::Font load_asset_font();
+    sf::Font load_font(const std::string fontName);
   protected:
     //members
     sf::RenderWindow *game_window;

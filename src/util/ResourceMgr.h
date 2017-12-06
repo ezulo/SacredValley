@@ -10,6 +10,7 @@ class ResourceMgr {
   public:
     sf::Font get_font(const std::string fontName);
     ResourceMgr(const std::string fontPath);
+    ResourceMgr();
     ~ResourceMgr();
   private:
     std::string path;

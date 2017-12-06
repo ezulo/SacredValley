@@ -9,10 +9,14 @@ sf::Font ResourceMgr::get_font(const std::string fontName) {
   return newFont;
 }
 
-ResouceMgr(const std::string resourcePath = "../../resource") {
+ResourceMgr::ResourceMgr() {
+  this->path = "../../resource";
+}
+
+ResourceMgr::ResourceMgr(const std::string resourcePath) {
   this->path = resourcePath;
 }
 
-~ResourceMgr() {
+ResourceMgr::~ResourceMgr() {
 
 }
