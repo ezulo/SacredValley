@@ -2,6 +2,7 @@
 #define MAINMENU_H
 
 #include "GameState.h"
+#include "../util/InputMgr.h"
 
 using namespace std;
 
@@ -12,14 +13,16 @@ class MainMenu : public GameState {
     void draw();
     int  loop();
     int  event(sf::Event* event);
-    MainMenu(sf::RenderWindow *wptr, InputMgr *iMptr);
+    bool key_listen(int key);
+    MainMenu(sf::RenderWindow* wptr, InputMgr* iMptr, ResourceMgr* rMptr);
     ~MainMenu();
   private:
     sf::CircleShape cursor;
+    sf::Text gameHeader;
     sf::Text optionBoxes[4];
-    float xVelo, yVelo;
-    bool flux;
-    int red;
+    bool keyState[4][2];
+    bool keyDown[4];
+    int selection;
 };
 
 #endif

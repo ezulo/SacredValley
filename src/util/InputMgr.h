@@ -13,7 +13,6 @@ class InputMgr {
     InputMgr();
     ~InputMgr();
   private:
-    int dirButtonArr[4];
     std::map<std::string, int> inputMap;
 };
 

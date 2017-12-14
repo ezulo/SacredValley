@@ -51,12 +51,11 @@ void RedCircle::handle_events(){
   return;
 }
 
-void RedCircle::load_assets(const std::string fontName) {
+void RedCircle::load_assets() {
 }
 
 void RedCircle::draw()
 {
-
   //create glow effect
   if (red >= 255) {
     flux = false;
@@ -73,9 +72,9 @@ void RedCircle::draw()
   //move sphere
   shape.move(xVelo, yVelo * -1);
   
-  game_window->clear();
-  game_window->draw(shape);
-  game_window->display();
+  gameWindow->clear();
+  gameWindow->draw(shape);
+  gameWindow->display();
   return;
 }
 
@@ -87,7 +86,7 @@ int RedCircle::loop()
   return 0;
 }
 
-int event(sf::Event* event)
+int RedCircle::event(sf::Event* event)
 {
   return 0;
 }

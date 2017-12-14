@@ -32,7 +32,7 @@ StateMgr::StateMgr(sf::RenderWindow* wPtr, InputMgr* iMptr, ResourceMgr* rMptr)
   gameWindow = wPtr;
   inputMgr = iMptr;
   resourceMgr = rMptr;
-  GameState *init_frame = new RedCircle(gameWindow, inputMgr, rMptr);
+  GameState *init_frame = new MainMenu(gameWindow, inputMgr, rMptr);
   push_state(init_frame);
 }
 

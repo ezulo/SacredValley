@@ -3,11 +3,11 @@
 
 #include <stack>
 #include <SFML/Graphics.hpp> 
+
+//util headers
 #include "InputMgr.h"
 #include "ResourceMgr.h"
-
-//all game state headers must be included below
-//unless we find a better way to do this...
+//game state headers
 #include "../states/GameState.h"
 #include "../states/RedCircle.h"
 #include "../states/MainMenu.h"

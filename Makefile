@@ -1,6 +1,6 @@
 SRC_DIR := src
 OBJ_DIR := build
-OBJS = $(patsubst %, ${OBJ_DIR}/%, main.o Game.o EventDispatcher.o StateMgr.o InputMgr.o ResourceMgr.o GameState.o RedCircle.o)
+OBJS = $(patsubst %, ${OBJ_DIR}/%, main.o Game.o EventDispatcher.o StateMgr.o InputMgr.o ResourceMgr.o GameState.o RedCircle.o MainMenu.o)
 CC = g++
 DEBUG = -g
 CFLAGS = -std=c++11 -c ${DEBUG}
@@ -8,7 +8,6 @@ LFLAGS = ${SFML} ${DEBUG}
 SFML = -lsfml-graphics -lsfml-window -lsfml-system 
 
 my_game: ${OBJS}
-	@echo ${OBJS}
 	${CC} ${OBJS} -o my_game ${LFLAGS} 	
 
 ${OBJ_DIR}/main.o: $(patsubst %, ${SRC_DIR}/%, main.cpp Game.h)
@@ -32,5 +31,9 @@ ${OBJ_DIR}/InputMgr.o: $(patsubst %, ${SRC_DIR}/%, util/InputMgr.cpp util/InputM
 ${OBJ_DIR}/GameState.o: $(patsubst %, ${SRC_DIR}/%, states/GameState.cpp util/InputMgr.h)
 	${CC} ${CFLAGS} ${SRC_DIR}/states/GameState.cpp -o $@
 
+${OBJ_DIR}/MainMenu.o: $(patsubst %, ${SRC_DIR}/%, states/MainMenu.cpp states/GameState.h)
+	${CC} ${CFLAGS} ${SRC_DIR}/states/MainMenu.cpp -o $@
+
 ${OBJ_DIR}/RedCircle.o: $(patsubst %, ${SRC_DIR}/%, states/RedCircle.cpp states/GameState.h)
 	${CC} ${CFLAGS} ${SRC_DIR}/states/RedCircle.cpp -o $@
+
