@@ -1,39 +1,141 @@
-SRC_DIR := src
-OBJ_DIR := build
-OBJS = $(patsubst %, ${OBJ_DIR}/%, main.o Game.o EventDispatcher.o StateMgr.o InputMgr.o ResourceMgr.o GameState.o RedCircle.o MainMenu.o)
-CC = g++
-DEBUG = -g
-CFLAGS = -std=c++11 -c ${DEBUG}
-LFLAGS = ${SFML} ${DEBUG}
-SFML = -lsfml-graphics -lsfml-window -lsfml-system 
+####################################################################################################
+## Application Build Configuration
+####################################################################################################
+.POSIX:
+.SUFFIXES:
 
-my_game: ${OBJS}
-	${CC} ${OBJS} -o my_game ${LFLAGS} 	
+## Compiler Selection
+##
+##   Prefer local configuration
+##
+CC  := clang  # C Compiler
+CXX := clang++  # C++ Compiler
 
-${OBJ_DIR}/main.o: $(patsubst %, ${SRC_DIR}/%, main.cpp Game.h)
-	${CC} ${CFLAGS} ${SRC_DIR}/main.cpp -o $@
+## Preprocessor Configuration
+##
+##   Custom configuration should come before $(CPPFLAGS) to prioritize local
+##   configurations
+##
+override CPPFLAGS := $(CPPFLAGS)
 
-${OBJ_DIR}/Game.o: $(patsubst %, ${SRC_DIR}/%, Game.cpp util/EventDispatcher.h util/StateMgr.h util/InputMgr.h util/ResourceMgr.h)
-	${CC} ${CFLAGS} ${SRC_DIR}/Game.cpp -o $@
+## Compiler Configuration
+##
+##   Custom configuration should come before $(CFLAGS) and $(CXXFLAGS) to
+##   prioritize local configurations
+##
+COMMON_CFLAGS := -Wall -Wextra -g
 
-${OBJ_DIR}/ResourceMgr.o: $(patsubst %, ${SRC_DIR}/%, util/ResourceMgr.cpp )
-	${CC} ${CFLAGS} ${SRC_DIR}/util/ResourceMgr.cpp -o $@
+override CFLAGS   := $(COMMON_CFLAGS) $(CFLAGS)
+override CXXFLAGS := $(COMMON_CFLAGS) -std=c++11 $(CXXFLAGS)
 
-${OBJ_DIR}/EventDispatcher.o: $(patsubst %, ${SRC_DIR}/%, util/EventDispatcher.cpp util/EventDispatcher.h)
-	${CC} ${CFLAGS} ${SRC_DIR}/util/EventDispatcher.cpp -o $@
+## Linker Configuration
+##
+##   Custom configuration should come before $(LDFLAGS) to prioritize local
+##   configurations
+##
+override LDFLAGS := -lsfml-graphics -lsfml-window -lsfml-system $(LDFLAGS)
 
-${OBJ_DIR}/StateMgr.o: $(patsubst %, ${SRC_DIR}/%, util/StateMgr.cpp util/InputMgr.h states/GameState.h states/RedCircle.h)
-	${CC} ${CFLAGS} ${SRC_DIR}/util/StateMgr.cpp -o $@
+## Debugger Options
+##
+RELEASE_FLAGS := -DNDEBUG
+DEBUG_FLAGS   := -DDEBUG
 
-${OBJ_DIR}/InputMgr.o: $(patsubst %, ${SRC_DIR}/%, util/InputMgr.cpp util/InputMgr.h)
-	${CC} ${CFLAGS} ${SRC_DIR}/util/InputMgr.cpp -o $@
+## Recursive Wildcards
+##
+##   This function acts similar to the $(wilcard) builtin, but can find files
+##   recursively
+##
+##   $(call rwildcard,dir/,*.ext)
+##
+##   When using rwildcard the directory *must* have the trailing slash
+##
+rwildcard = $(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 
-${OBJ_DIR}/GameState.o: $(patsubst %, ${SRC_DIR}/%, states/GameState.cpp util/InputMgr.h)
-	${CC} ${CFLAGS} ${SRC_DIR}/states/GameState.cpp -o $@
+## Unique
+##
+unique = $(if $1,$(firstword $1) $(call unique,$(filter-out $(firstword $1),$1)))
 
-${OBJ_DIR}/MainMenu.o: $(patsubst %, ${SRC_DIR}/%, states/MainMenu.cpp states/GameState.h)
-	${CC} ${CFLAGS} ${SRC_DIR}/states/MainMenu.cpp -o $@
+####################################################################################################
+## Application Configuration
+####################################################################################################
 
-${OBJ_DIR}/RedCircle.o: $(patsubst %, ${SRC_DIR}/%, states/RedCircle.cpp states/GameState.h)
-	${CC} ${CFLAGS} ${SRC_DIR}/states/RedCircle.cpp -o $@
+EXE := my_game
+
+SRC_DIR   := src
+SRC_FILES := $(call rwildcard,$(SRC_DIR)/,*.cpp)
+
+OBJ_DIR        := build/obj
+OBJ_FILES      := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
+OBJ_FILES_DIRS := $(call unique,$(dir $(OBJ_FILES)))
+
+DEP_DIR        := build/dep
+DEP_FILES      := $(patsubst $(SRC_DIR)/%.cpp,$(DEP_DIR)/%.d,$(SRC_FILES))
+DEP_FILES_DIRS := $(call unique,$(dir $(DEP_FILES)))
+
+####################################################################################################
+## Application Setup
+####################################################################################################
+
+all: directories $(EXE)
+
+-include $(DEP_FILES)
+
+debug: export CPPFLAGS := $(DEBUG_FLAGS) $(CPPFLAGS)
+release: export CPPFLAGS := $(RELEASE_FLAGS) $(CPPFLAGS)
+
+debug: all
+release: all
+
+$(EXE): $(OBJ_FILES)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $^
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@echo "Compiling: $< -> $@"
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -w -c -o $@ -MP -MMD -MF $(DEP_DIR)/$(notdir $@) $<
+
+####################################################################################################
+## Application Utilities
+####################################################################################################
+
+## Directory Creation
+##
+DIRECTORIES := 		\
+	$(OBJ_FILES_DIRS)	\
+	$(DEP_FILES_DIRS)
+
+.PHONY: directories $(DIRECTORIES)
+directories: $(DIRECTORIES)
+
+$(DIRECTORIES):
+	@mkdir -p $@
+
+## Cleanup
+##
+.PHONY: clean
+clean:
+	@rm -f $(EXE)		\
+		$(OBJ_FILES)	\
+		$(DEP_FILES)
+
+## Debug Printing
+##
+print-%:
+	@echo $* = $($*)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
