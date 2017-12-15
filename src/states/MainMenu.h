@@ -17,6 +17,7 @@ class MainMenu : public GameState {
     MainMenu(sf::RenderWindow* wptr, InputMgr* iMptr, ResourceMgr* rMptr);
     ~MainMenu();
   private:
+    sf::Font font;
     sf::CircleShape cursor;
     sf::Text gameHeader;
     sf::Text optionBoxes[4];

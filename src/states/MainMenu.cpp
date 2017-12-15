@@ -23,15 +23,16 @@ void MainMenu::handle_events(){
   if (key_listen(3)) {
     selection = (selection - 1) % 4;    
   }
+  if (selection == -1)
+    selection = 3;
   //simple action: position the cursor according to selection state
   //TO ADD: PLAY A SOUND
-  cursor.setPosition(80.0, 200.0 + (selection * 50)); 
+  cursor.setPosition(80.0, 191.0 + (selection * 50)); 
   return;
 }
 
 void MainMenu::load_assets() {
-  sf::Font font;
-  if (font.loadFromFile("../../resource/fonts/arial.ttf")) {
+  if (font.loadFromFile("./resource/fonts/arial.ttf")) {
     //need to figure out what to do if resource can't be loaded
     //send signal to Game instance to stop?
     //need higher level event listener
@@ -48,12 +49,13 @@ void MainMenu::load_assets() {
     }
     //fonts and sizes are set...
     //set positions
-    //gameHeader.setPosition(100.0, 100.0);
-    //optionBoxes[0].setPosition(100.0, 200.0);
-    //optionBoxes[1].setPosition(100.0, 250.0);
-    //optionBoxes[2].setPosition(100.0, 300.0);
-    //optionBoxes[2].setPosition(100.0, 350.0);
+    gameHeader.setPosition(80.0, 100.0);
+    optionBoxes[0].setPosition(100.0, 200.0);
+    optionBoxes[1].setPosition(100.0, 250.0);
+    optionBoxes[2].setPosition(100.0, 300.0);
+    optionBoxes[3].setPosition(100.0, 350.0);
     cursor.setPosition(80.0, 200.0);
+    cursor.setRotation(90.0);
   }
   else {
     std::cout << "Font could not be loaded" << endl;
@@ -66,9 +68,14 @@ void MainMenu::draw()
   gameWindow->clear();
   gameWindow->draw(cursor);
   gameWindow->draw(gameHeader);
-  for (int i = 0; i < 4; i++) {
-    gameWindow->draw(optionBoxes[i]);
-  } 
+  gameWindow->draw(optionBoxes[0]);
+  gameWindow->draw(optionBoxes[1]);
+  gameWindow->draw(optionBoxes[2]);
+  //gameWindow->draw(optionBoxes[3]);
+  //for (int i = 0; i < 4; i++) {
+  //  gameWindow->draw(optionBoxes[i]);
+  //} 
+  gameWindow->display();
   return;
 }
 
@@ -118,14 +125,13 @@ bool MainMenu::key_listen(int key)
 
 MainMenu::MainMenu(sf::RenderWindow* wptr, InputMgr* iMptr, ResourceMgr* rMptr):GameState(wptr, iMptr, rMptr)
 {
+  font = sf::Font();
   //initialize cursor
   cursor = sf::CircleShape(20.f, 3);
-  //initialize text boxes (maybe get these from config file tho?)
-  gameHeader = sf::Text();
-  optionBoxes[0] = sf::Text();
-  optionBoxes[1] = sf::Text();
-  optionBoxes[2] = sf::Text();
-  optionBoxes[3] = sf::Text();
+  //optionBoxes[0] = sf::Text();
+  //optionBoxes[1] = sf::Text();
+  //optionBoxes[2] = sf::Text();
+  //optionBoxes[3] = sf::Text();
   //initialize selection key states
   selection = 0;
   keyDown[0] = false;
