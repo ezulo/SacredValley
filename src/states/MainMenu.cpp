@@ -2,7 +2,7 @@
 #include "MainMenu.h"
 
 //probably shouldn't be using global vars
-const std::string HEADER = "Project Blaze-it (working title)";
+const std::string HEADER = "Project Sacred Valley (working title)";
 
 const std::string MENU_PROMPTS[4] = {
   "New Game",
@@ -11,7 +11,7 @@ const std::string MENU_PROMPTS[4] = {
   "Credits"
 };
 
-void MainMenu::handle_events(){
+int MainMenu::handle_events(){
   keyDown[0] = inputMgr->getInput("dir_right"); 
   keyDown[1] = inputMgr->getInput("dir_down"); 
   keyDown[2] = inputMgr->getInput("dir_left"); 
@@ -28,10 +28,18 @@ void MainMenu::handle_events(){
   //simple action: position the cursor according to selection state
   //TO ADD: PLAY A SOUND
   cursor.setPosition(80.0, 191.0 + (selection * 50)); 
-  return;
+  //user input handled here (not yet though)
+  //some int should be returned for what input was received
+  if (inputMgr->getInput("X")) {
+    return -2;
+  }
+  if (inputMgr->getInput("Z")) {
+    return selection;
+  }
+  return -1;
 }
 
-void MainMenu::load_assets() {
+int MainMenu::load_assets() {
   if (font.loadFromFile("./resource/fonts/arial.ttf")) {
     //need to figure out what to do if resource can't be loaded
     //send signal to Game instance to stop?
@@ -60,40 +68,54 @@ void MainMenu::load_assets() {
   else {
     std::cout << "Font could not be loaded" << endl;
   }
+  return -1;
 }
 
-void MainMenu::draw()
+int MainMenu::draw()
 {
   //draw everything
   gameWindow->clear();
   gameWindow->draw(cursor);
   gameWindow->draw(gameHeader);
-  gameWindow->draw(optionBoxes[0]);
-  gameWindow->draw(optionBoxes[1]);
-  gameWindow->draw(optionBoxes[2]);
-  //gameWindow->draw(optionBoxes[3]);
-  //for (int i = 0; i < 4; i++) {
-  //  gameWindow->draw(optionBoxes[i]);
-  //} 
+  for (int i = 0; i < 4; i++) {
+    gameWindow->draw(optionBoxes[i]);
+  } 
   gameWindow->display();
-  return;
+  return -1;
 }
 
 int MainMenu::loop()
 {
   inputMgr->listen();
-  handle_events();
+  int menu_selected = handle_events();
   draw();
-  return 0;
+  return menu_selected;
 }
 
 int MainMenu::event(sf::Event* event)
 {
-  return 0;
+  return -1;
+}
+
+GameState* MainMenu::resolve_transition(int code)
+{
+  GameState* state;
+  switch(code) {
+    case 0:
+      state = new RedCircle(gameWindow, inputMgr, resourceMgr); 
+      break;
+    default:
+      //state mgr responsible for handling this
+      state = this;
+      break;
+  }
+  return state;
 }
 
 bool MainMenu::key_listen(int key)
 {
+  //DON'T MESS WITH THIS
+  //Low level state machine, forgot how it works exactly
   switch(((int)keyState[key][0] * 2) + (int)keyState[key][1]) {
     case 0:
       if (keyDown[key]) {
@@ -128,10 +150,6 @@ MainMenu::MainMenu(sf::RenderWindow* wptr, InputMgr* iMptr, ResourceMgr* rMptr):
   font = sf::Font();
   //initialize cursor
   cursor = sf::CircleShape(20.f, 3);
-  //optionBoxes[0] = sf::Text();
-  //optionBoxes[1] = sf::Text();
-  //optionBoxes[2] = sf::Text();
-  //optionBoxes[3] = sf::Text();
   //initialize selection key states
   selection = 0;
   keyDown[0] = false;

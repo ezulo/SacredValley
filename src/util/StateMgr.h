@@ -20,10 +20,11 @@ class StateMgr {
     StateMgr(sf::RenderWindow* wPtr, InputMgr* iMptr, ResourceMgr* rMptr);
     ~StateMgr();
   private:
+    bool push_state(GameState* state);
+    bool pop_state();
     void purge_states();
-    void push_state(GameState* state);
-    void pop_state();
     stack<GameState*> states;
+    bool state_lock;
     sf::RenderWindow* gameWindow;
     InputMgr* inputMgr;
     ResourceMgr* resourceMgr;

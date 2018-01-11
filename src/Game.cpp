@@ -15,7 +15,15 @@ void Game::run()
         return;
       }
     }
-    if (loop() == -1) return;
+    int loopSignal = loop();
+    if (loopSignal == -4) {
+      std::cout << "No states remaining. Terminating." << endl;
+      return;
+    }
+    if (loopSignal == -3) {
+      std::cout << "A fatal error has occured. Terminating." << endl;
+      return;
+    }  
   }
   return;
 }

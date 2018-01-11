@@ -4,15 +4,21 @@
 #include "GameState.h"
 #include "../util/InputMgr.h"
 
+//standard:
+//game states need to have included all new game states they
+//will create. in the case of "New Game"...
+#include "RedCircle.h"
+
 using namespace std;
 
 class MainMenu : public GameState {
   public:
-    void handle_events();
-    void load_assets();
-    void draw();
+    int handle_events();
+    int load_assets();
+    int draw();
     int  loop();
     int  event(sf::Event* event);
+    GameState* resolve_transition(int code);
     bool key_listen(int key);
     MainMenu(sf::RenderWindow* wptr, InputMgr* iMptr, ResourceMgr* rMptr);
     ~MainMenu();

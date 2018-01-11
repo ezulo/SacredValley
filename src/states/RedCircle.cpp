@@ -3,7 +3,7 @@
 
 const float DEF_VELO = 10.0;
 
-void RedCircle::handle_events(){
+int RedCircle::handle_events(){
   float mult = 0.7071067;
   switch (inputMgr->getInput("dir")){
     case -1:
@@ -48,13 +48,17 @@ void RedCircle::handle_events(){
       yVelo = 0;
       break;
   }
-  return;
+  if (inputMgr->getInput("X")) {
+    return -2;
+  }
+  return -1;
 }
 
-void RedCircle::load_assets() {
+int RedCircle::load_assets() {
+  return -1;
 }
 
-void RedCircle::draw()
+int RedCircle::draw()
 {
   //create glow effect
   if (red >= 255) {
@@ -75,20 +79,26 @@ void RedCircle::draw()
   gameWindow->clear();
   gameWindow->draw(shape);
   gameWindow->display();
-  return;
+  return -1;
 }
 
 int RedCircle::loop()
 {
   inputMgr->listen();
-  handle_events();
+  int result = handle_events();
   draw();
-  return 0;
+  return result;
 }
 
 int RedCircle::event(sf::Event* event)
 {
-  return 0;
+  return -1;
+}
+
+GameState* RedCircle::resolve_transition(int code)
+{
+  //no transitions to be made yet
+  return this;
 }
 
 RedCircle::RedCircle(sf::RenderWindow* wptr, InputMgr* iMptr, ResourceMgr* rMptr):GameState(wptr, iMptr, rMptr)

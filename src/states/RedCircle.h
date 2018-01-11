@@ -8,11 +8,12 @@ using namespace std;
 
 class RedCircle : public GameState {
   public:
-    void handle_events();
-    void load_assets();
-    void draw();
-    int  loop();
-    int  event(sf::Event* event);
+    int handle_events();
+    int load_assets();
+    int draw();
+    int loop();
+    int event(sf::Event* event);
+    GameState* resolve_transition(int code);
     RedCircle(sf::RenderWindow* wptr, InputMgr* iMptr, ResourceMgr* rMptr);
     ~RedCircle();
   private:
