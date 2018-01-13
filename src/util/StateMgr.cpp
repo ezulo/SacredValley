@@ -7,19 +7,27 @@ PUBLIC
 
 int StateMgr::loop()
 {
-  if (get_current_state() != NULL){ 
+  //loop codes:
+  //-4: no states found
+  //-3: fatal error, purge states
+  //-2: remove state from stack
+  //-1: all good
+  //0-99: state transition code
+  if (!states.empty()){ 
     int loopSignal = get_current_state()->loop();
     switch(loopSignal) {
       case -3:
         purge_states(); 
         break;
       case -2:
+        std::cout << "State popped." << endl;
         pop_state();
         if (states.empty()) return -4;
         break;
       case -1:
         break;
       default:
+        std::cout << "New state: " << loopSignal << endl;
         GameState* newState = get_current_state()->resolve_transition(loopSignal);
         if (newState != get_current_state()) {
           push_state(newState);
@@ -34,10 +42,10 @@ int StateMgr::loop()
 
 int StateMgr::transmit_event(sf::Event *event)
 {
-  if (get_current_state()){
+  if (!states.empty()){
     return get_current_state()->event(event);
   }
-  return 0;
+  return -1;
 }
 
 GameState* StateMgr::get_current_state()

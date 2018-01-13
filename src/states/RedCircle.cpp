@@ -5,7 +5,7 @@ const float DEF_VELO = 10.0;
 
 int RedCircle::handle_events(){
   float mult = 0.7071067;
-  switch (inputMgr->getInput("dir")){
+  switch (inputMgr->get_input("dir")){
     case -1:
       xVelo = 0;
       yVelo = 0;
@@ -48,7 +48,7 @@ int RedCircle::handle_events(){
       yVelo = 0;
       break;
   }
-  if (inputMgr->getInput("X")) {
+  if (inputMgr->get_input("x", 1)) {
     return -2;
   }
   return -1;

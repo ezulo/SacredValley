@@ -19,7 +19,6 @@ class MainMenu : public GameState {
     int  loop();
     int  event(sf::Event* event);
     GameState* resolve_transition(int code);
-    bool key_listen(int key);
     MainMenu(sf::RenderWindow* wptr, InputMgr* iMptr, ResourceMgr* rMptr);
     ~MainMenu();
   private:
@@ -27,8 +26,6 @@ class MainMenu : public GameState {
     sf::CircleShape cursor;
     sf::Text gameHeader;
     sf::Text optionBoxes[4];
-    bool keyState[4][2];
-    bool keyDown[4];
     int selection;
 };
 
