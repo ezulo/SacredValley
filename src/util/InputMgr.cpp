@@ -37,7 +37,6 @@ void InputMgr::listen()
   inputMap["dir_up"] =    get_key_state("dir_up",    sf::Keyboard::isKeyPressed(sf::Keyboard::Up));
   inputMap["z"] =         get_key_state("z",         sf::Keyboard::isKeyPressed(sf::Keyboard::Z)); 
   inputMap["x"] =         get_key_state("x",         sf::Keyboard::isKeyPressed(sf::Keyboard::X));
-  inputMap["dir"] =       translate_dir();
 }
 
 bool InputMgr::get_input(const std::string q, int singlePress)
@@ -54,23 +53,7 @@ bool InputMgr::get_input(const std::string q, int singlePress)
   return false;
 }
 
-
-InputMgr::InputMgr()
-{
-  inputMap["dir_right"] = 0;
-  inputMap["dir_down"]  = 0;
-  inputMap["dir_left"]  = 0;
-  inputMap["dir_up"]    = 0;
-  inputMap["dir"]       = -1;
-  inputMap["z"]         = 0;
-  inputMap["x"]         = 0; 
-}
-
-InputMgr::~InputMgr()
-{
-}
-
-int InputMgr::translate_dir() 
+int InputMgr::get_dir()
 {
   int sum = 0;
   sum += inputMap["dir_right"] > 0 ? 1 : 0;
@@ -78,6 +61,20 @@ int InputMgr::translate_dir()
   sum += inputMap["dir_left"] > 0 ? 4 : 0;
   sum += inputMap["dir_up"] > 0 ? 8 : 0;
   return directionTable[sum];
+}
+
+InputMgr::InputMgr()
+{
+  inputMap["dir_right"] = 0;
+  inputMap["dir_down"]  = 0;
+  inputMap["dir_left"]  = 0;
+  inputMap["dir_up"]    = 0;
+  inputMap["z"]         = 0;
+  inputMap["x"]         = 0; 
+}
+
+InputMgr::~InputMgr()
+{
 }
 
 int InputMgr::get_key_state(const std::string q, bool keyPressed)
