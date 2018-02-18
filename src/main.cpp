@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "Game.h"
+#include "engine/components/Game.h"
 #include <iostream>
 
 //int main() {
@@ -22,7 +22,7 @@
 //  return 0;
 //}
 
-int main() {
+int main(int argc, char* argv[]) {
   Game* main;
   main = new Game();
   main->run();

@@ -2,7 +2,7 @@
 #define MAINMENU_H
 
 #include "GameState.h"
-#include "../util/InputMgr.h"
+#include "../components/InputMgr.h"
 
 //standard:
 //game states need to have included all new game states they

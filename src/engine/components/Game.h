@@ -6,10 +6,10 @@
 #include <SFML/Graphics.hpp>
 
 //all util modules
-#include "util/EventDispatcher.h"
-#include "util/InputMgr.h"
-#include "util/StateMgr.h"
-#include "util/ResourceMgr.h"
+#include "EventDispatcher.h"
+#include "InputMgr.h"
+#include "StateMgr.h"
+#include "ResourceMgr.h"
 
 using namespace std;
 

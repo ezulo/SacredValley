@@ -2,7 +2,7 @@
 #define REDCIRCLE_H
 
 #include "GameState.h"
-#include "../util/InputMgr.h"
+#include "../components/InputMgr.h"
 
 using namespace std;
 

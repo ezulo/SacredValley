@@ -2,8 +2,8 @@
 #define GAMESTATE_H
 #include <SFML/Graphics.hpp>
 #include <queue>
-#include "../util/InputMgr.h"
-#include "../util/ResourceMgr.h"
+#include "../components/InputMgr.h"
+#include "../components/ResourceMgr.h"
 
 class GameState{
   public:

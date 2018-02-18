@@ -40,9 +40,12 @@ bool Game::is_running()
 
 Game::Game() 
 {
+  //we want this to be variable at some point in time...
+  int framerateLimit = 60;
+
   eventDispatcher = new EventDispatcher(stateMgr, gameWindow);
-  gameWindow = new sf::RenderWindow(sf::VideoMode(800,600), "SFML Works!");
-  gameWindow->setFramerateLimit(60);
+  gameWindow = new sf::RenderWindow(sf::VideoMode(800,600), "SFML_SacredValley");
+  gameWindow->setFramerateLimit(framerateLimit);
   inputMgr = new InputMgr();
   stateMgr = new StateMgr(gameWindow, inputMgr, resourceMgr);
   resourceMgr = new ResourceMgr("../../resource");

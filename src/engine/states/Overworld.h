@@ -1,8 +1,8 @@
-#ifndef OVERWORLD_H
-#define OVERWORLD_H
+#ifndef REDCIRCLE_H
+#define OVERWORLD_H 
 
 #include "GameState.h"
-#include "../util/InputMgr.h"
+#include "../components/InputMgr.h"
 
 using namespace std;
 
@@ -14,11 +14,13 @@ class Overworld : public GameState {
     int loop();
     int event(sf::Event* event);
     GameState* resolve_transition(int code);
+    Overworld(sf::RenderWindow* wptr, InputMgr* iMptr, ResourceMgr* rMptr);
+    ~Overworld();
   private:
-    //don't worry so much about save game functionality right now
-    int pause_menu();
-    int save_game();
-    int load_game();
+    sf::CircleShape shape;
+    float xVelo, yVelo;
+    bool flux;
+    int red;
 };
 
 #endif
