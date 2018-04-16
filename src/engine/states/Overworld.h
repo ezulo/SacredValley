@@ -1,4 +1,4 @@
-#ifndef REDCIRCLE_H
+#ifndef OVERWORLD_H 
 #define OVERWORLD_H 
 
 #include "GameState.h"
@@ -18,7 +18,9 @@ class Overworld : public GameState {
     ~Overworld();
   private:
     sf::CircleShape shape;
+    float xPos, yPos;
     float xVelo, yVelo;
+    float xCamPosition, yCamPosition;
     bool flux;
     int red;
 };

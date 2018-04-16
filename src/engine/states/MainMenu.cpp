@@ -99,7 +99,7 @@ GameState* MainMenu::resolve_transition(int code)
   GameState* state;
   switch(code) {
     case 0:
-      state = new RedCircle(gameWindow, inputMgr, resourceMgr); 
+      state = new Overworld(gameWindow, inputMgr, resourceMgr); 
       break;
     default:
       //state mgr responsible for handling this

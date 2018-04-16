@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Overworld.h"
 
-const float DEF_VELO = 10.0;
+const float DEF_VELO = 5.0;
 
 int Overworld::handle_events(){
   float mult = 0.7071067;
@@ -55,6 +55,7 @@ int Overworld::handle_events(){
 }
 
 int Overworld::load_assets() {
+  //load static map objects onto field
   return -1;
 }
 

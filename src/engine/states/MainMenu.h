@@ -8,6 +8,7 @@
 //game states need to have included all new game states they
 //will create. in the case of "New Game"...
 #include "RedCircle.h"
+#include "Overworld.h"
 
 using namespace std;
 
