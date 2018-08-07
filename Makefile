@@ -59,7 +59,7 @@ unique = $(if $1,$(firstword $1) $(call unique,$(filter-out $(firstword $1),$1))
 ## Application Configuration
 ####################################################################################################
 
-EXE := my_game
+EXE := game_main
 
 SRC_DIR   := src
 SRC_FILES := $(call rwildcard,$(SRC_DIR)/,*.cpp)

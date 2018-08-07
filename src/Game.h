@@ -13,12 +13,6 @@
 
 using namespace std;
 
-enum Runflag {
-  RUNFLAG_LOADING,
-  RUNFLAG_STARTED,
-  RUNFLAG_QUIT
-};
-
 class Game {
   
   public:
@@ -31,11 +25,9 @@ class Game {
   
   private:
     StateMgr* stateMgr;
-    InputMgr* inputMgr;
     ResourceMgr* resourceMgr;
     EventDispatcher* eventDispatcher;
     sf::RenderWindow* gameWindow;
-    Runflag runflag;
 };
 
 #endif
