@@ -1,15 +1,15 @@
 #include "DisplayModule.h"
 
-DisplayModule::DisplayModule(WindowProperties props) {
-	window = new sf::RenderWindow(
-		sf::VideoMode(props.getXRes(), props.getYRes()), 
+DisplayModule::DisplayModule(ApplicationConfig& cfg) {
+	gameWindow = new sf::RenderWindow(
+		sf::VideoMode(cfg->get_prop("xres"), cfg->get_prop("yres")), 
 		"SFML_SacredValley"
 	);
-	window->setFramerateLimit(props.getFramerateLimit());
+	gameWindow->setFramerateLimit(cfg->get_prop["framerateLimit"]);
 }
 
 DisplayModule::~DisplayModule() {
-	delete window;
+	delete gameWindow;
 }
 
 void DisplayModule::add_object(GameObject* newObj) {
@@ -18,4 +18,8 @@ void DisplayModule::add_object(GameObject* newObj) {
 
 void DisplayModule::purge_objects() {
 	activeObjects.clear();
+}
+
+void DisplayModule::draw() {
+	return;
 }

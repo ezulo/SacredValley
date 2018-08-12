@@ -1,33 +1,32 @@
 #ifndef GAME_H
 #define GAME_H
 
-//libraries
-#include <stack>
 #include <SFML/Graphics.hpp>
-
-//all util modules
+#include "ApplicationConfig.h"
 #include "EventDispatcher.h"
-#include "InputMgr.h"
 #include "StateMgr.h"
 #include "ResourceMgr.h"
+#include "DisplayModule.h"
+#include "AudioModule.h"
+#include "InputModule.h"
+#include <stack>
 
 using namespace std;
 
 class Game {
-  
   public:
-    void init();
     void run();
     int loop();
-    bool is_running();
     Game();
     ~Game();
   
   private:
+	DisplayModule* displayM;
+	AudioModule* audioM;
+	InputModule* inputM;
     StateMgr* stateMgr;
     ResourceMgr* resourceMgr;
     EventDispatcher* eventDispatcher;
-    sf::RenderWindow* gameWindow;
 };
 
 #endif

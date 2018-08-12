@@ -2,7 +2,8 @@
 #define DISPLAYMODULE_H
 
 #include "GameObject.h"
-#include "WindowProperties.h"
+#include "ApplicationConfig.h"
+
 #include <SFML/Graphics.hpp>
 #include <vector>
 
@@ -13,13 +14,13 @@
 // vector will render them onto the game window.
 class DisplayModule {
 	public:
-		DisplayModule();
+		DisplayModule(ApplicationConfig& cfg);
 		~DisplayModule();
 		void add_object(GameObject* newObj)
-		void purge_objects(GameObject* disObj);
-		draw();
+		void purge_objects();
+		void draw();
 	private:
-		sf::RenderWindow window;	
+		sf::RenderWindow* gameWindow;	
 		vector<GameObject*> activeObjects;
 }
 
