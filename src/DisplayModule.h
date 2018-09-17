@@ -5,6 +5,8 @@
 #include "ApplicationConfig.h"
 
 #include <SFML/Graphics.hpp>
+#include <algorithm>
+#include <stdexcept>
 #include <vector>
 
 
@@ -20,6 +22,7 @@ class DisplayModule {
 		void purge_objects();
 		void draw();
 	private:
+		void draw_object(GameObject* obj);
 		sf::RenderWindow* gameWindow;	
 		vector<GameObject*> activeObjects;
 }

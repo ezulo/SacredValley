@@ -16,6 +16,7 @@ int ApplicationConfig::get_prop(const std::string& key) {
 		return configMap[key];
 	}	
 	else {
-		throw "Attempt to access config key " + key + " failed. Key not found.";
+		throw std::runtime_error("Attempt to access config key " + 
+				key + " failed. Key not found.");
 	}
 }

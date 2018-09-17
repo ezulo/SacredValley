@@ -1,0 +1,18 @@
+The state manager will have 2 objects playing a crucial role:
+	* stateStack
+		This is a stack because the game will be modeled such that states
+		stack on top of each other. A simple model lets us revert to a previous
+		state without any cost. E.g., a sample stack might look like:
+		Init -> MainMenu -> Overworld -> PauseMenu
+		Doing it this way allows us to revert states simply by popping off
+		the current state...this will send some event to the previous "parent"
+		state to cascade any changes.
+	* eventQueue
+		This is a queue for the sake of predictability. If we want one event
+		to happen before another, then we push it onto the queue first, and
+		they are processed in that order. Also if we decide to "chunk" event
+		processing into a set number of events per timestep, this ensures
+		that no starvation occurs (an event at the bottom of a stack being
+		neglected)
+
+All methods in the class will regularly access and transform these two objects.
