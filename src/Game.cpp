@@ -3,6 +3,7 @@
 void Game::init() {
 	// Do game prep stuff here not pertaining
 	// directly to Game class...e.g. pop a state on here,
+	stateMgr->pop_init_state();
 	return;
 }
 
@@ -22,15 +23,15 @@ void Game::loop()
 
 Game::Game() 
 {
-	//we want this to be variable at some point in time...
 	appConfig = new ApplicationConfig();
 	stateMgr = new StateMgr(gameWindow, inputMgr, resourceMgr);
-	resourceMgr = new ResourceMgr("../../resource");
-	eventMgr = new EventMgr(this);
+	//resourceMgr = new ResourceMgr("../../resource");
+	//eventMgr = new EventMgr(this);
 	displayMod = new DisplayModule(appConfig);
-	audioMod = new AudioModule();
-	inputMod = new InputModule(eventMgr);
+	//audioMod = new AudioModule();
+	//inputMod = new InputModule(eventMgr);
 	init();
+	run();
 }
 
 Game::~Game()
