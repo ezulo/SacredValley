@@ -1,43 +1,41 @@
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#ifndef OBJECT_H
+#define OBJECT_H
 
 #include <SFML/Graphics.hpp>
 
-// GameObject encapsulates any object in game that is
-// displayed or interacted with. GameObject will contain
+// Object encapsulates any object in game that is
+// displayed or interacted with. Object will contain
 // object behaviors (e.g. for player character, move
 // when arrow key is pressed and animate accordingly)
 
-class GameObject() {
+class Object() {
 	public:
-		GameObject();
-		~GameObject();
+		Object(const std::string textureFileName);
+		~Object();
 		bool get_visible();
 		void set_visible(bool vis);
-		void set_physics(bool detectEvent, bool applyPhysics);
 		double get_x_pos();
 		double get_y_pos();
+		sf::Vector2 get_pos();
+		double get_angle();
+		bool get_mirror();
 		void set_pos(double x, double y);
-		void set_angle(double theta);
-		// Get SFML objects
-		sf::Sprite get_sprite();
+		void set_pos(sf::Vector2 newPos);
+		void set_angle(double newTheta);
+		void set_mirror(bool mir);
 	private:
 		// Metadata
 		bool isVisible;
-		bool detectCollisionEvent;
-		bool applyCollisionPhysics;
 		// Physical characteristics
-		double xSize;
-		double ySize;
-		double xPos;
-		double yPos;
 		double theta;
 		bool mirror;
+		sf::Vector2 size;
+		sf::Vector2 pos;
 		// SFML objects
 		// Note: handling of below data structs will differ depending on whther
 		// the object is static or animated.
-		sf::Texture texture;
-		sf::Sprite sprite;
+		sf::Texture* texture;
+		sf::Sprite* sprite;
 }
 
 #endif

@@ -27,23 +27,22 @@ void DisplayModule::purge_objects() {
 		delete (*it);
 	}
 	activeObjects.clear();
-
 }
 
 void DisplayModule::draw() {
-	std::for_each(activeObjects.begin(), activeObjects.end(), draw_object);
-	gameWindow->display();
+	if (gameWindows->isOpen()) {
+		std::for_each(activeObjects.begin(), activeObjects.end(), draw_object);
+		gameWindow->display();
+	}
+	else {
+		throw std::runtime_error("Error from renderer: game window inactive.") 
+	}
 	return;
 }
 
 void DisplayModule::draw_object(GameObject* obj) {
-	if (gameWindow->isOpen()) {
-		if (obj->get_visible()) {
-			gameWindow->draw(obj->get_sprite());
-		}
-	}
-	else {
-		throw std::runtime_error("Error from renderer: game window inactive.") 
+	if (obj->get_visible()) {
+		gameWindow->draw(obj->get_sprite());
 	}
 	return;
 }
