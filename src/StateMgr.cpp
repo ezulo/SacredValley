@@ -4,33 +4,28 @@
 PUBLIC
 */
 
-StateMgr::StateMgr()
-{
+StateMgr::StateMgr() {
 	GameState *init_frame = new MainMenu();
 	push_state(init_frame);
 }
 
-StateMgr::~StateMgr()
-{
-	// leave room her to serialize states...
+StateMgr::~StateMgr() {
 	// need to empty states
 	purge_states();
 }
 
 
-void StateMgr::loop()
-{
+void StateMgr::loop() {
 	// Main loop, called every time frame
 	process_events();
 }
 
-void StateMgr::push_event(Event event) {
-	eventQueue.push(event);
+void receive_event(sf::Event event) {
+	get_current_state->receive_event(event);
 }
 
 
-GameState& StateMgr::get_current_state()
-{
+GameState& StateMgr::get_current_state() {
 	return stateStack.top();
 }
 
@@ -38,21 +33,18 @@ GameState& StateMgr::get_current_state()
 PRIVATE
 */
 
-bool StateMgr::pop_state()
-{
+bool StateMgr::pop_state() {
 	if (stateStack.empty())
 		return false;
 	stateStack.pop();
 	return true;
 }
 
-void StateMgr::push_state(GameState *state)
-{			 
+void StateMgr::push_state(GameState *state) { 
 	stateStack.push(state);
 }
 
-void StateMgr::purge_states()
-{
+void StateMgr::purge_states() {
 	while (!states.empty()) {
 		GameState* tmp = stateStack.top();
 		stateStack.pop();

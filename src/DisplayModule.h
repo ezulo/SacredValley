@@ -20,11 +20,12 @@ class DisplayModule {
 		~DisplayModule();
 		void add_object(GameObject* newObj)
 		void purge_objects();
-		void draw();
+		void loop();
 	private:
+		void draw();
 		void draw_object(GameObject* obj);
 		sf::RenderWindow* gameWindow;	
 		vector<GameObject*> activeObjects;
-}
+};
 
 #endif

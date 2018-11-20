@@ -83,17 +83,13 @@ int Overworld::draw()
   return -1;
 }
 
-int Overworld::loop()
+void Overworld::loop()
 {
-  inputMgr->listen();
-  int result = handle_events();
   draw();
-  return result;
 }
 
-int Overworld::event(sf::Event* event)
+void Overworld::receive_event(sf::Event* event)
 {
-  return -1;
 }
 
 GameState* Overworld::resolve_transition(int code)

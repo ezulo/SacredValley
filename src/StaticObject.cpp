@@ -2,7 +2,8 @@
 
 StaticObject::StaticObject(const std::string textureFileName) 
 	: Object(textureFileName) {
-		size = texture.getSize();
+		size.x = texture->getSize().x;
+		size.y = texture->getSize().y;
 		mirror = false;
 		theta = 0;
 		pos.x = 0;

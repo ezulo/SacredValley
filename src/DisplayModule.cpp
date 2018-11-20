@@ -29,6 +29,10 @@ void DisplayModule::purge_objects() {
 	activeObjects.clear();
 }
 
+void DisplayModule::loop() {
+	draw();
+}
+
 void DisplayModule::draw() {
 	if (gameWindows->isOpen()) {
 		std::for_each(activeObjects.begin(), activeObjects.end(), draw_object);

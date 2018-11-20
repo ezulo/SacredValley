@@ -34,7 +34,7 @@ double Object::get_y_pos() {
 	return pos.y;
 }
 
-sf::Vector2 Object::get_pos() {
+sf::Vector2<double> Object::get_pos() {
 	return pos;
 }
 
@@ -52,7 +52,7 @@ void Object::set_pos(double x, double y) {
 	sprite.setPosition(pos);
 }
 
-void Object::set_pos(sf::Vector2 newPos) {
+void Object::set_pos(sf::Vector2<double> newPos) {
 	pos = newPos;
 	sprite.setPosition(pos);
 }

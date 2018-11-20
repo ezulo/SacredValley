@@ -3,7 +3,6 @@
 
 //probably shouldn't be using global vars
 const std::string HEADER = "Project Sacred Valley (working title)";
-
 const std::string MENU_PROMPTS[4] = {
   "New Game",
   "Load Game",

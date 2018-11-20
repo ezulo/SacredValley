@@ -8,7 +8,7 @@
 // object behaviors (e.g. for player character, move
 // when arrow key is pressed and animate accordingly)
 
-class Object() {
+class Object {
 	public:
 		Object(const std::string textureFileName);
 		~Object();
@@ -16,26 +16,26 @@ class Object() {
 		void set_visible(bool vis);
 		double get_x_pos();
 		double get_y_pos();
-		sf::Vector2 get_pos();
+		sf::Vector2<double> get_pos();
 		double get_angle();
 		bool get_mirror();
 		void set_pos(double x, double y);
-		void set_pos(sf::Vector2 newPos);
+		void set_pos(sf::Vector2<double> newPos);
 		void set_angle(double newTheta);
 		void set_mirror(bool mir);
-	private:
+	protected:
 		// Metadata
 		bool isVisible;
 		// Physical characteristics
 		double theta;
 		bool mirror;
-		sf::Vector2 size;
-		sf::Vector2 pos;
+		sf::Vector2<double> size;
+		sf::Vector2<double> pos;
 		// SFML objects
 		// Note: handling of below data structs will differ depending on whther
 		// the object is static or animated.
 		sf::Texture* texture;
 		sf::Sprite* sprite;
-}
+};
 
 #endif

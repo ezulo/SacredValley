@@ -9,6 +9,6 @@ class WindowProperties {
 		int xres;
 		int yres;
 
-}
+};
 
 #endif

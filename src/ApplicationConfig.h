@@ -11,6 +11,6 @@ class ApplicationConfig {
 		int get_prop(const std::string& key);
 	private:
 		std::map<std::string,int> configMap; 
-}
+};
 
 #endif
