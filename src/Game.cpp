@@ -19,7 +19,6 @@ void Game::run()
 void Game::loop() 
 {
 	stateMgr->loop();
-	displayMod->loop();
 }
 
 Game::Game() 
@@ -28,7 +27,6 @@ Game::Game()
 	stateMgr = new StateMgr();
 	//resourceMgr = new ResourceMgr("../../resource");
 	//eventMgr = new EventMgr(this);
-	displayMod = new DisplayModule(appConfig);
 	//audioMod = new AudioModule();
 	//inputMod = new InputModule(eventMgr);
 	init();

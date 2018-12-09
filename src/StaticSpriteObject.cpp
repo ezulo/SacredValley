@@ -1,6 +1,6 @@
-#include "StaticObject.h"
+#include "StaticSpriteObject.h"
 
-StaticObject::StaticObject(const std::string textureFileName) 
+StaticSpriteObject::StaticSpriteObject(const std::string textureFileName) 
 	: Object(textureFileName) {
 		size.x = texture->getSize().x;
 		size.y = texture->getSize().y;
@@ -10,5 +10,5 @@ StaticObject::StaticObject(const std::string textureFileName)
 		pos.y = 0;
 }
 
-StaticObject::~StaticObject() {
+StaticSpriteObject::~StaticSpriteObject() {
 }

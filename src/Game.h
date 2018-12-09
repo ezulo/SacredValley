@@ -6,7 +6,6 @@
 #include "StateMgr.h"
 #include "ResourceMgr.h"
 #include "EventMgr.h"
-#include "DisplayModule.h"
 #include "AudioModule.h"
 #include "InputModule.h"
 
@@ -31,7 +30,6 @@ class Game {
       EventMgr* eventMgr;
       StateMgr* stateMgr;
       ResourceMgr* resourceMgr;
-	  DisplayModule* displayMod;
 	  AudioModule* audioMod;
 	  InputModule* inputMod;
 };

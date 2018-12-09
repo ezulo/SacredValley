@@ -10,19 +10,19 @@
 
 class Object {
 	public:
-		Object(const std::string textureFileName);
+		Object();
 		~Object();
 		bool get_visible();
-		void set_visible(bool vis);
 		double get_x_pos();
 		double get_y_pos();
 		sf::Vector2<double> get_pos();
 		double get_angle();
 		bool get_mirror();
-		void set_pos(double x, double y);
-		void set_pos(sf::Vector2<double> newPos);
-		void set_angle(double newTheta);
-		void set_mirror(bool mir);
+		void set_visible(bool vis);
+		virtual void set_pos(double x, double y) = 0;
+		virtual void set_pos(sf::Vector2<double> newPos) = 0;
+		virtual void set_angle(double newTheta) = 0;
+		virtual void set_mirror(bool mir) = 0;
 	protected:
 		// Metadata
 		bool isVisible;
@@ -34,8 +34,6 @@ class Object {
 		// SFML objects
 		// Note: handling of below data structs will differ depending on whther
 		// the object is static or animated.
-		sf::Texture* texture;
-		sf::Sprite* sprite;
 };
 
 #endif

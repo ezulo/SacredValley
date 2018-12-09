@@ -6,17 +6,17 @@
 
 using namespace std;
 
+// THIS IS JUST A TEST CLASS
+// TO TEST INPUT AND SHIT
 class RedCircle : public GameState {
   public:
-    int handle_events();
-    int load_assets();
-    int draw();
-    int loop();
-    int event(sf::Event* event);
-    GameState* resolve_transition(int code);
-    RedCircle(sf::RenderWindow* wptr, InputMgr* iMptr, ResourceMgr* rMptr);
+    void load_assets();
+    void loop();
+    void receive_event(sf::Event* event);
+    RedCircle();
     ~RedCircle();
   private:
+    void draw();
     sf::CircleShape shape;
     float xVelo, yVelo;
     bool flux;

@@ -6,6 +6,7 @@
 #include "GameState.h"
 #include "MainMenu.h"
 #include "Overworld.h"
+#include "DisplayModule.h"
 
 class StateMgr {
 	public:
@@ -19,7 +20,7 @@ class StateMgr {
 		void push_state(GameState* state);
 		void purge_states();
 		std::stack<GameState*> stateStack;
-		ResourceMgr resourceMgr;
+		DisplayModule* displayMod;
 };
 
 #endif

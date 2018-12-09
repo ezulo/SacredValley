@@ -6,6 +6,7 @@ PUBLIC
 
 StateMgr::StateMgr() {
 	GameState *init_frame = new MainMenu();
+	displayMod = new DisplayModule();
 	push_state(init_frame);
 }
 

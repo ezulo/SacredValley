@@ -7,26 +7,23 @@
 //standard:
 //game states need to have included all new game states they
 //will create. in the case of "New Game"...
-#include "RedCircle.h"
 #include "Overworld.h"
+#include "TextObject.h"
+#include "StaticSpriteObject.h"
 
 using namespace std;
 
 class MainMenu : public GameState {
   public:
-    int handle_events();
-    int load_assets();
-    int draw();
-    int  loop();
-    int  event(sf::Event* event);
-    GameState* resolve_transition(int code);
-    MainMenu(sf::RenderWindow* wptr, InputMgr* iMptr, ResourceMgr* rMptr);
+    void load_assets();
+    void  loop();
+    void  receive_event(sf::Event* event);
+    MainMenu();
     ~MainMenu();
   private:
-    sf::Font font;
-    sf::CircleShape cursor;
-    sf::Text gameHeader;
-    sf::Text optionBoxes[4];
+    TextObject* gameHeader;
+    TextObject* optionBoxes[4];
+	StaticSpriteObject* pointer;
     int selection;
 };
 

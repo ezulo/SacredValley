@@ -1,60 +1,8 @@
-#include <iostream>
 #include "RedCircle.h"
 
 const float DEF_VELO = 10.0;
 
-int RedCircle::handle_events(){
-  float mult = 0.7071067;
-  switch (inputMgr->get_dir()){
-    case -1:
-      xVelo = 0;
-      yVelo = 0;
-      break;
-    case 0:
-      xVelo = DEF_VELO;
-      yVelo = 0;
-      break;
-    case 1:
-      xVelo = DEF_VELO * mult;
-      yVelo = -DEF_VELO * mult;
-      break;
-    case 2:
-      xVelo = 0;
-      yVelo = -DEF_VELO;
-      break;
-    case 3:
-      xVelo = -DEF_VELO * mult;
-      yVelo = -DEF_VELO * mult;
-      break;
-    case 4:
-      xVelo = -DEF_VELO;
-      yVelo = 0;
-      break;
-    case 5:
-      xVelo = -DEF_VELO * mult;
-      yVelo = DEF_VELO * mult;
-      break;
-    case 6:
-      xVelo = 0;
-      yVelo = DEF_VELO;
-      break;
-    case 7:
-      xVelo = DEF_VELO * mult;
-      yVelo = DEF_VELO * mult;
-      break;
-    default:
-      std::cout << "ERROR PARSING DIRECTION" << endl;
-      xVelo = 0;
-      yVelo = 0;
-      break;
-  }
-  if (inputMgr->get_input("x", 1)) {
-    return -2;
-  }
-  return -1;
-}
-
-int RedCircle::load_assets() {
+void RedCircle::load_assets() {
   return -1;
 }
 

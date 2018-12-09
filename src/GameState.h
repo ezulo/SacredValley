@@ -13,6 +13,8 @@ typedef std::set<Object*> ObjectSet;
 
 class GameState {
   public:
+	GameState(EventMgr* eMgr);
+	~GameState();
     //functionality defined by states
     virtual void load_assets() = 0;
     virtual void loop() = 0;
@@ -22,6 +24,7 @@ class GameState {
   protected:
     virtual void  draw() = 0;
 	ObjectSet objects;
+	EventMgr* eventMgr;
 };
 
 #endif
